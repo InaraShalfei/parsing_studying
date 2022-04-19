@@ -9,7 +9,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='photos/', verbose_name='main photo')
     date = models.DateTimeField()
     url = models.URLField(max_length=250, verbose_name='url of an article')
-    sharing_count = models.IntegerField(verbose_name='number of sharing')
+    sharing_count = models.IntegerField(default=0, verbose_name='number of sharing')
 
     class Meta:
         ordering = ('date', )

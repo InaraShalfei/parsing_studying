@@ -3,6 +3,8 @@ import re
 import requests
 from slugify import slugify
 
+from parsing_sites.models import Article
+
 host = 'https://www.ng.kz/'
 response = requests.get(url=host)
 regex = r"<div class=\"\w+\"><li class=\"\w+\"><span class=\"\w+\"><img width=70 height=70 src='(https://www\.ng\.kz/images/library/news_lenta/[\w\d/.]+)'></span><b><a class=art href='https://www\.ng\.kz/modules/news/article\.php\?storyid=\d+'>([\w\d\s.,%()+\":?!№«»-]+)</a></b><div class=news_time>([\w\d\s]+, \d\d:\d\d)</div><div style=\"text-align: justify;\"><a class=art href='(https://www\.ng\.kz/modules/news/article\.php\?storyid=\d+)'>([\w\d\s.,%()+\":?!№«»-]+)\.</a>"
@@ -16,3 +18,20 @@ for article in articles:
     with open('photos/' + slugify(image_url)[:-10] + '.' +
               str(image_url.split('.')[-1]), 'wb') as img_file:
         img_file.write(image_response.content)
+
+# article_regex = r"<p class=\"sign-content\">([\w\s.]+)</p>"
+#
+# for article in articles:
+#     article_url = article['url']
+#     article_response = requests.get(url=article_url)
+#     result = re.search(article_regex, article_response.text)
+#     print(result.group(1))
+#     # articles.append({'author': result})
+
+
+for article in articles:
+    Article(title=article['title'],
+            short_text=article['text'],
+            image=article['img'],
+            url=article['url'],
+            date=article['date'])
