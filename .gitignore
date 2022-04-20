@@ -131,5 +131,5 @@ dmypy.json
 venv
 /.idea/.gitignore
 
-/parsing_sites/photos
-/parsing_sites/photos/https-www-ng-kz-images-library-news-lenta-2022-0.jpg
+/photos
+/photos/https-www-ng-kz-images-library-news-lenta-2022-0.jpg

@@ -5,10 +5,17 @@
     <title>Articles</title>
 </head>
 <body>
-{% for aricle in articles %}
-    <p><strong>{{ article }}</strong></p>
+{% block content %}
+{% for article in articles %}
+{{ forloop.counter }}
+    <p><strong>{{ article.title }}</strong></p>
+<p><a href={{ article.url }} >Article link</a></p>
     {% if not forloop.last %}
     {% endif %}
     {% endfor %}
 </body>
+{% if page.has_other_pages %}
+{% include "includes/paginator.html" with items=page paginator=paginator%}
+{% endif %}
+{% endblock %}
 </html>
