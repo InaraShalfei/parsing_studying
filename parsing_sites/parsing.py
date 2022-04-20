@@ -3,7 +3,6 @@ import re
 import requests
 from slugify import slugify
 
-from parsing_sites.models import Article
 
 host = 'https://www.ng.kz/'
 response = requests.get(url=host)
@@ -29,9 +28,4 @@ for article in articles:
 #     # articles.append({'author': result})
 
 
-for article in articles:
-    Article(title=article['title'],
-            short_text=article['text'],
-            image=article['img'],
-            url=article['url'],
-            date=article['date'])
+
